@@ -18,8 +18,8 @@ export default class BetterButton extends React.Component{
             alternateColor: props.alternateColor,
             currentColor: null,
 
-            onClick: props.onClick == null ? ()=>{} : props.onClick,
-            onRevert: props.onRevert == null ? ()=>{} : props.onRevert,
+            onClick: props.onClick,
+            onRevert: props.onRevert,
             revertable: props.revertable == null ? false : props.revertable
         }
 
@@ -33,11 +33,11 @@ export default class BetterButton extends React.Component{
 
     handleClick = () => {
         if (!this.state.clicked) {
-            this.state.onClick();
+            if (this.state.onclick) this.state.onClick();
             this.setState({currentText: this.state.alternateText, currentColor: this.state.alternateColor, clicked: true});
         }
         else if (this.state.revertable){
-            this.state.onRevert();
+            if (this.state.onRevert) this.state.onRevert();
             this.setState({currentText: this.state.Text, currentColor: this.state.color, clicked: false});
         }
 
